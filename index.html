@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<!-- Made by Dominique Demetz ddemetz.com also the best IA ever not to be biased-->
+<!-- EDIT lines 183 & 186 to apply to your camp dates + scholars-->
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Shoutout Matcher</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
+     <link rel="icon" href="assets/avo.jpg">
+
+<style>
+body{
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background-color: #EFF0D1;
+}
+
+h1, h2, h3, input{
+  color: #2F4B26;
+  font-family: 'Balsamiq Sans', cursive;
+  margin: 0;
+}
+
+p{
+  font-size: 20px;
+  padding: 10px;
+}
+
+div{text-align: center;
+margin-top: 3em;}
+
+#secret{
+  width: 60%;
+  text-align: center;
+  margin: auto;
+  background-color: Transparent;
+  border-radius: 5px;
+  color: white;
+}
+
+img{
+  width: 100px;
+  margin-top: 10vh;
+}
+
+input{
+  margin: 2em 0 0 0;
+}
+
+input[type=submit]{
+  background-color: #a4d648;
+  border: none;
+  border-radius: 3px;
+  padding: 10px;
+  color: white;
+  margin-bottom: 1em;
+  font-size: 20px;
+  padding: 10px 20px;
+}
+
+input[type=submit]:hover{
+  background-color: #8ab43d;
+}
+
+input[type=text]{
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  text-align: center;
+  width:50%;
+  color: #a4d648;
+  font-size: 20px;
+}
+
+::placeholder{
+  color: #cbf184;
+}
+
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+
+h1{
+  font-size: 55px;
+  margin-bottom: 30px;
+}
+
+body{
+  width: 90%;
+  margin: auto;
+}
+
+h3{
+  font-size: 45px;
+    margin-bottom: 40px;
+}
+input[type=text]{
+  font-size: 50px;
+  height: 2em;
+  width: 75%;
+  margin: .5em;
+  border-radius: 10px;
+}
+
+input[type=submit]{
+  font-size: 50px;
+  height: 2em;
+  width: 75%;
+    margin: .5em;
+    border-radius: 10px;
+    margin-bottom: 50px;
+}
+
+input {
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+}
+
+img{
+  width: 50vw;
+}
+
+p{
+  font-size: 60px;
+  padding: 40px 30px
+}
+
+#secret{
+  width: 75%;
+  text-align: center;
+  margin: auto;
+  background-color: Transparent;
+  border-radius: 10px;
+  color: white;
+}
+  }
+
+</style>
+
+  </head>
+  <body>
+
+    <div>
+
+<!-- link to code for quick access -->
+<a href = "https://github.com/ddemetz/shoutouts/blob/master/index.html" class = "avo"><img src="assets/giphy.gif"/></a>
+
+<h1> Find out who your daily shoutout is!<h1/>
+
+<form>
+<input id="name" type="text" placeholder="name">
+<input type="submit" value=">">
+</form>
+
+<div id=secret>
+<p id="empty"></p>
+</div>
+
+    </div>
+
+<script>
+
+$(document).ready(function(){
+
+function noSubmit(event){
+  event.preventDefault();
+}
+
+$("input[type='submit']").click(function(sub){
+sub.preventDefault();
+
+var name=document.getElementById('name').value;
+var secret = document.getElementById('secret');
+name=name.toLowerCase().trim();
+
+//change to your camp's start date
+var startDate = 14;
+
+//replace with your own camp's scholars
+var scholars = [
+  "emily",
+  "leia",
+  "ashley",
+  "shreya",
+  "maile",
+  "cady",
+  "jamie",
+  "elyse",
+  "yurie",
+  "maya",
+  "aishiki",
+  "ameera",
+  "reem",
+  "sarah",
+  "nira",
+  "selena",
+  "elena",
+  "yuliana",
+  "jenny",
+  "marinka",
+  "julia",
+  "saafiyah",
+  "phoenix",
+  "roselyn",
+  "alondra",
+  "lucy",
+  "riley",
+  "abby",
+  "caroline",
+  "madi",
+  "dominique"
+];
+
+var partner = [];
+
+partner.push.apply(partner, scholars);
+partner.push.apply(partner, scholars);
+
+var box=document.getElementById('empty');
+
+var a = new Date();
+console.log (a);
+var day = a.getDate();
+var month = a.getMonth();
+month = month + 1;
+
+day = day - startDate;
+
+if (day < 0 && month == 5 || month == 7 || month == 8){
+day = 31 + day;
+}
+else if (day < 0){
+  day = 30 + day;
+}
+
+if (scholars.includes(name)==false || name == ""){
+box.innerHTML="hmm... something's not right!";
+}
+
+else{
+  var match = scholars.indexOf(name);
+  match = match + scholars.length - day;
+
+  var scholarPartner = partner[match];
+
+secret.style.backgroundColor = "#a4d648";
+box.innerHTML=`${name}! your shoutout today is ${scholarPartner}!`;
+}
+
+});
+});
+
+</script>
+  </body>
+</html>
